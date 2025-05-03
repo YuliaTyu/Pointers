@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TransferParameters", "Trans
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DinamikMemory", "DinamikMemory\DinamikMemory.vcxproj", "{334B2CFF-5C5B-4CF8-8EAF-E81AB47FCFAE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Split", "Split\Split.vcxproj", "{33561A48-98FA-4897-8B01-CF9C382F8EEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{334B2CFF-5C5B-4CF8-8EAF-E81AB47FCFAE}.Release|x64.Build.0 = Release|x64
 		{334B2CFF-5C5B-4CF8-8EAF-E81AB47FCFAE}.Release|x86.ActiveCfg = Release|Win32
 		{334B2CFF-5C5B-4CF8-8EAF-E81AB47FCFAE}.Release|x86.Build.0 = Release|Win32
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Debug|x64.ActiveCfg = Debug|x64
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Debug|x64.Build.0 = Debug|x64
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Debug|x86.ActiveCfg = Debug|Win32
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Debug|x86.Build.0 = Debug|Win32
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Release|x64.ActiveCfg = Release|x64
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Release|x64.Build.0 = Release|x64
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Release|x86.ActiveCfg = Release|Win32
+		{33561A48-98FA-4897-8B01-CF9C382F8EEC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
