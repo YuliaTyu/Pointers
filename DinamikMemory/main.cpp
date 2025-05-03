@@ -3,6 +3,7 @@ using namespace std;
 
 void FillRand(int arr[], const int n);
 void Print(int arr[], const int n);
+int* Push_back(int arr[], int& n, const int value);
 
 void main()
 {
@@ -14,9 +15,45 @@ void main()
 	FillRand(arr, n);
 	Print(arr, n);
 
+	cout << arr << endl;
+	cout << *arr << endl;
+	for (int i = 0; i < n; i++)
+	{
+		cout << *(arr + i) << "\t";
+	}
+	cout << endl;
+
+
 	int value;
 	cout << "Введите добавляемое значение"; cin >> value;
+	arr = Push_back(arr, n, value);
 
+	Print(arr, n);
+
+
+	delete[] arr;
+	//Memory leak
+	
+}
+
+void FillRand(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = rand() % 100;
+		//Index operator, Subscript operator;
+	}
+}
+void Print(int arr[], const int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << "\t";
+	}
+	cout << endl;
+}
+int* Push_back(int arr[], int& n, const int value)
+{
 	//переопределить память - создаем буфферный массив нужного массива
 	int* buffer = new int[n + 1];
 
@@ -38,26 +75,6 @@ void main()
 
 	//после того как в массив дбавился элемент количество его элементов увеличивается на 1
 	n++;
-	Print(arr, n);
-
-
-	delete[] arr;
-	//Memory leak
-}
-
-void FillRand(int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		arr[i] = rand() % 100;
-		//Index operator, Subscript operator;
-	}
-}
-void Print(int arr[], const int n)
-{
-	for (int i = 0; i < n; i++)
-	{
-		cout << arr[i] << "\t";
-	}
-	cout << endl;
+	
+	return arr;
 }
