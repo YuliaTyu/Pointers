@@ -1,24 +1,63 @@
 #include<iostream>
 using namespace std;
 
-void Exchange(int& a, int& b);
+void FillRand(int arr[], const int n);
+void Print(int arr[], const int n);
 
 void main()
 {
 	setlocale(LC_ALL, "");
 	int n;
-	cout << "¬ведите размер массива"; cin >> n;
+	cout << "¬ведите размер массива: "; cin >> n;
 	int* arr = new int[n];
 
+	FillRand(arr, n);
+	Print(arr, n);
+
+	int value;
+	cout << "¬ведите добавл€емое значение"; cin >> value;
+
+	//переопределить пам€ть - создаем буфферный массив нужного массива
+	int* buffer = new int[n + 1];
+
+	//копируем все содежимое исходного массива в буфферный массив
+	for (int i = 0; i < n; i++)
+	{
+		buffer[i] = arr[i];
+	}
+
+	//удал€ем исходный массив 
+	delete[] arr;
+
+	//подмен€ем адрес в указателе arr адресом нового массива
+
+	arr = buffer;
+
+	//только после этого в конце массива по€вл€етс€ элемент, в которое можно сохранить добавл€емое значение
+	arr[n] = value;
+
+	//после того как в массив дбавилс€ элемент количество его элементов увеличиваетс€ на 1
+	n++;
+	Print(arr, n);
+
+
+	delete[] arr;
+	//Memory leak
+}
+
+void FillRand(int arr[], const int n)
+{
 	for (int i = 0; i < n; i++)
 	{
 		arr[i] = rand() % 100;
+		//Index operator, Subscript operator;
 	}
+}
+void Print(int arr[], const int n)
+{
 	for (int i = 0; i < n; i++)
 	{
 		cout << arr[i] << "\t";
 	}
 	cout << endl;
-	delete[] arr;
-
 }
