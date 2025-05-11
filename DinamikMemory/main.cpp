@@ -69,9 +69,9 @@ void main()
 	Print(arr, n);
 
 	cout << "Массив после уладения последнего элемента" << endl;
-	Print(arr = Pop_back(arr, n), n);// удален последний элемент массива
+	Print(arr = Pop_back(arr, n), n);                            
 	cout << "Массив после удаления нулевого элемента" << endl;
-	Print(arr = Pop_front(arr, n), n);//удален нулевой элемент массива 
+	Print(arr = Pop_front(arr, n), n);                           
 
 
 	cout << "Введите индекс удаляемого значение"; cin >> index;
@@ -192,29 +192,22 @@ int* Push_back(int arr[], int& n, const int value)
 }
 int* Push_front(int arr[], int& n, const int value)
 {
-	int* buffer = new int[n + 1];
-	for (int i = 0; i < n; i++)
-	{
-		buffer[i + 1] = arr[i];
-	}
-	delete arr;
-	buffer[0] = value;
-	n++;
+	int* buffer = new int[n + 1];                     //выделяем память нужного размера +1
+	for (int i = 0; i < n; i++)buffer[i + 1] = arr[i];//копируем в буффер
+	delete[] arr;                                     //удаляем исходный массив
+	buffer[0] = value;                                // добавляем значение в нулевой элемент!!!!!!!!!!!!
+	n++;                                              // кол-во элементов в массиве увеличивается
 	return buffer;
 }
 
 int* insert(int arr[], int& n, const int value, int index)
 {
-	int* buffer = new int[n + 1];
-	for (int i = 0; i < index; i++)
-		buffer[i] = arr[i];
+	int* buffer = new int[n + 1];                      //выделяем память нужного элемента   
+	for (int i = 0; i < index; i++)buffer[i] = arr[i]; //копируем в буффер до индекса!
 	
-	for (int i = index; i < n; i++)
-		buffer[i + 1] = arr[i];
-	
-	delete[] arr;
-
-	buffer[index] = value;
+	for (int i = index; i < n; i++)buffer[i + 1] = arr[i];//копируем после индекса
+	delete[] arr;                                         //удаляем исходный массив 
+	buffer[index] = value;                                //в элемент добавляем значение по индексу!
 	n++;
 	return buffer;
 }
@@ -223,17 +216,17 @@ int* insert(int arr[], int& n, const int value, int index)
 int* Pop_back(int arr[], int& n)
 {
 	cout << arr << endl;
-	int* buffer = new int[--n];//памать выделится в первую очередь из-за --
-	for (int i = 0; i < n; i++)buffer[i] = arr[i];//копируем массив в буффер
-	delete[] arr;//удаляем исходный
+	int* buffer = new int[--n];                        //память выделится в первую очередь из-за --
+	for (int i = 0; i < n; i++)buffer[i] = arr[i];     //копируем массив в буффер
+	delete[] arr;                                      //удаляем исходный
 	return buffer;
 }
 int* Pop_front(int arr[], int& n)
 {
 	cout << arr << endl;
 	int* buffer = new int[--n];
-	for (int i = 0; i < n; i++)buffer[i] = arr[i+1];//копируем массив в буффер
-	delete[] arr;//удаляем исходный
+	for (int i = 0; i < n; i++)buffer[i] = arr[i+1];   
+	delete[] arr;                                      
 	arr = buffer;
 	
 	return buffer;
@@ -243,8 +236,8 @@ int* Pop_front(int arr[], int& n)
 int* Erase(int arr[], int& n, const int index)
 {
 	int* buffer = new int[--n];
-	for (int i = 0; i < n; i++)buffer[i] = (i < index ? arr[i] : arr[i + 1]);
-
+	for (int i = 0; i < index; i++)buffer[i] = arr[i];
+	for (int i = index; i < n; i++)buffer[i] = arr[i + 1];
 	delete[] arr;
 	arr = buffer;
 	return buffer;
