@@ -9,16 +9,26 @@ using std::endl;
 
 void FillRand(int arr[], const int n);
 void FillRand(int** arr, const int rows, const int cols);
+
 void Print(int arr[], const int n);
 void Print(int** arr, const int rows, const int cols);
-int* Push_back(int arr[], int& n, const int value);
-int* Push_front(int arr[], int& n, const int value);
+
+int* Push_back(int arr[], int& n, const int value);//добавляет последний элемент массива
+int* Push_front(int arr[], int& n, const int value);//добавляет нулевой элемент массива
+
 int* insert(int arr[], int& n, const int value, int index);
-int* Pop_back(int arr[], int& n);
 
-int** push_row_back(int** arr, int& rows, const int cols);//добавляем строку в массив
+int* Pop_back(int arr[], int& n);//удаляет последний элемент массива
+int* Pop_front(int arr[], int& n);//удаляет нулевой элемент массива
 
-//#define DINAMIC_MEMORY_1
+int* Erase(int arr[], int& n, const int index);//удаляет элемент массива по указанному индексу
+
+int** push_row_back(int** arr, int& rows, const int cols);//добавляем строку в конец массива
+int** push_row_front(int** arr, int& rows, const int cols);//добавляем строку в начало массива
+
+#define DINAMIC_MEMORY_1
+//#define DINAMIC_MEMORY_2
+
 
 void main()
 {
@@ -58,11 +68,23 @@ void main()
 	arr = insert(arr, n, value, index);
 	Print(arr, n);
 
+	cout << "Массив после уладения последнего элемента" << endl;
 	Print(arr = Pop_back(arr, n), n);// удален последний элемент массива
+	cout << "Массив после удаления нулевого элемента" << endl;
+	Print(arr = Pop_front(arr, n), n);//удален нулевой элемент массива 
+
+
+	cout << "Введите индекс удаляемого значение"; cin >> index;
+	cout << "Массив после удаления элемента по индексу" << endl;
+	Print(arr = Erase(arr, n, index),n);
+	
+
 
 	delete[] arr;
 
 #endif // DINAMIC_MEMORY_1
+
+#ifdef DINAMIC_MEMORY_2
 
 
 	int rows;
@@ -87,6 +109,8 @@ void main()
 
 
 	
+
+
 	//очистить память
 	for (int i = 0; i < rows; i++)// сначала удаляем строки
 	{
@@ -94,6 +118,7 @@ void main()
 	}
 	delete[] arr;// удаляем массив укзателей
 
+#endif // DINAMIC_MEMORY_2
 
 }
 
@@ -203,6 +228,30 @@ int* Pop_back(int arr[], int& n)
 	delete[] arr;//удаляем исходный
 	return buffer;
 }
+int* Pop_front(int arr[], int& n)
+{
+	cout << arr << endl;
+	int* buffer = new int[--n];
+	for (int i = 0; i < n; i++)buffer[i] = arr[i+1];//копируем массив в буффер
+	delete[] arr;//удаляем исходный
+	arr = buffer;
+	
+	return buffer;
+}
+
+
+int* Erase(int arr[], int& n, const int index)
+{
+	int* buffer = new int[--n];
+	for (int i = 0; i < n; i++)buffer[i] = (i < index ? arr[i] : arr[i + 1]);
+
+	delete[] arr;
+	arr = buffer;
+	return buffer;
+
+		
+}
+
 
 int** push_row_back(int** arr, int& rows, const int cols)
 {
@@ -226,6 +275,4 @@ int** push_row_back(int** arr, int& rows, const int cols)
 
 	//возвращаем новый массив на место вызова
 	return buffer;
-
 }
-
