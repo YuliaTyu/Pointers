@@ -27,7 +27,7 @@ int** push_row_back(int** arr, int& rows, const int cols);//добавляем �
 int** push_row_front(int** arr, int& rows, int& cols);//добавляем строку в начало массива
 
 int** push_col_back(int** arr, int& rows, int& cols);//добавляет столбец в конец массива
-int** push_col_front(int** arr, int& rows, int& cols);//добавляет столбец в начало массива
+//int** push_col_front(int** arr, int& rows, int& cols);//добавляет столбец в начало массива
 
 //#define DINAMIC_MEMORY_1
 #define DINAMIC_MEMORY_2
@@ -104,6 +104,14 @@ void main()
 		arr[i] = new int[cols];
 	}
 	
+	cout << "Вывести двумерный динамический массив на экран используя арифметику указателей и оператор разыменования;)))))))) " << endl;
+	int* prows;
+	int* pcols;
+	prows = &rows;
+	pcols = &cols;
+	cout << *prows << *pcols << endl;
+	
+
 	
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
@@ -117,8 +125,7 @@ void main()
 	arr = push_col_back(arr, rows, cols);//????????????
 	Print(arr, rows, cols);
 
-	//arr = push_col_front(arr, rows, cols);
-	//Print(arr, rows, cols);
+	
 
 
 
@@ -261,14 +268,16 @@ int** push_row_front(int** arr, int& rows, int& cols)
 }
 int** push_col_back(int** arr, int& rows, int& cols)
 {
-	int** buffer = new int* [cols+1];                  //создаем буффер указателей нужного размера
-	for (int i = 0; i < rows; i++)buffer[i] = arr[i];  //копируем адреса стролбцов в буфферный массив указателей
-	delete[] arr;                                      // удаляем массив укзателей	
-	buffer[rows] = new int[cols] {};                   //создаем добавляемый столбец и записываем его адрес в массив указателей
-	cols++;                                            //???при добавлении в массив строки количество его строк увеличивается на 1
-	return buffer;                                     //возвращаем новый массив на место вызова
+	int** buffer = new int* [rows];                  
+	for (int i = 0; i < rows+1; i++)           
+	{
+		for (int j = 0; j < cols; j++)
+		{                                            
+			buffer[j] = arr[j];                       
+		}
+	}
+	delete[] arr;                                      
+	buffer[cols] = new int[cols+1] {};                   
+	cols++;                                            
+	return buffer;                                    
 }
-//int** push_col_front(int** arr, int& rows, int& cols)
-//{
-	
-//}
